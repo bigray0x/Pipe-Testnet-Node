@@ -125,7 +125,8 @@ B: edit the file below and paste with your details inside the config.json.
     "discord": "your_discord_username",
     "telegram": "your_telegram_handle",
     "solana_pubkey": "YOUR_SOLANA_WALLET_ADDRESS_FOR_REWARDS"
-  }
+  },
+  "invite_code": "your_code_here"
 }
 ```
 C: Build the dockerimage inside the pipe-docker folder.
