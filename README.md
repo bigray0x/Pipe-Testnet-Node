@@ -36,14 +36,14 @@ sudo apt update -y && sudo apt upgrade -y
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
-Test Docker Installation
+B: Test Docker Installation
 
 ```bash
 sudo docker run hello-world
 ```
 
 
-step 2 : Create Pipe Docker Directory and Dockerfile
+### step 2 : Create Pipe Docker Directory and Dockerfile
 
 A: Create pipe-docker directory.
 
@@ -83,3 +83,73 @@ VOLUME /app/config
 # Run POP with config
 CMD ["pop", "--config", "/app/config/config.json"]
 ```
+
+### Step 3: Create config/config.json
+
+A: Create the config and config.json folder and file. 
+
+```bash
+mkdir -p ~/pipe-docker/config && cd ~/pipe-docker/config && nano config.json
+```
+
+B: edit the file below and paste with your details inside the config.json.  
+
+```bash
+{
+  "pop_name": "your-pop-name",
+  "pop_location": "Your Location, Country",
+  "server": {
+    "host": "0.0.0.0",
+    "port": 443,
+    "http_port": 80,
+    "workers": 40
+  },
+  "cache_config": {
+    "memory_cache_size_mb": 4096,
+    "disk_cache_path": "./cache",
+    "disk_cache_size_gb": 100,
+    "default_ttl_seconds": 86400,
+    "respect_origin_headers": true,
+    "max_cacheable_size_mb": 1024
+  },
+  "api_endpoints": {
+    "base_url": "https://dataplane.pipenetwork.com"
+  },
+  "identity_config": {
+    "node_name": "your-node-name",
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "website": "https://your-website.com",
+    "discord": "your_discord_username",
+    "telegram": "your_telegram_handle",
+    "solana_pubkey": "YOUR_SOLANA_WALLET_ADDRESS_FOR_REWARDS"
+  }
+}
+```
+C: Build the dockerimage inside the pipe-docker folder.
+
+```bash
+cd $HOME/pipe-docker && docker build -t pipe-pop .
+```
+### Step 4: Run The Pipe Node
+
+A: Run the node using docker.
+
+```bash
+docker rm -f popnode
+
+docker run -d --name popnode \
+  -v ~/pipe-docker/config/config.json:/app/config.json \
+  -p 4000:4000 \
+  pipe-pop pop --config /app/config.json
+```
+
+B: Monitor the Logs
+
+```bash
+docker logs -f popnode
+```
+
+if you see this then you're good!
+
+
