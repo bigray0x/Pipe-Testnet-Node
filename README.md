@@ -43,5 +43,43 @@ sudo docker run hello-world
 ```
 
 
-step 2 : build docker image  
+step 2 : Create Pipe Docker Directory and Dockerfile
 
+A: Create pipe-docker directory.
+
+```bash
+mkdir -p ~/pipe-docker && cd ~/pipe-docker
+```
+
+B: Create Dockerfile.
+
+```bash
+nano Dockerfile
+```
+
+C: Paste this into the file without editing it.
+```bash
+# Use Ubuntu 24.04 which ships with glibc >= 2.39
+FROM ubuntu:24.04
+
+# Install dependencies
+RUN apt update && \
+    apt install -y curl wget libssl-dev ca-certificates tmux && \
+    apt clean
+
+# Set work directory
+WORKDIR /app
+
+# Download pop binary
+RUN wget -O pop.tar.gz https://download.pipe.network/static/pop-v0.3.0-linux-x64.tar.gz && \
+    tar -xzf pop.tar.gz && \
+    chmod +x pop && \
+    mv pop /usr/local/bin/pop && \
+    rm pop.tar.gz
+
+# Create volume for config
+VOLUME /app/config
+
+# Run POP with config
+CMD ["pop", "--config", "/app/config/config.json"]
+```
