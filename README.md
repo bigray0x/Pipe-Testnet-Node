@@ -1,6 +1,8 @@
 # Pipe-Testnet-Node
 
-this guide is for those who ran pipe devnet node and has gotten an invite code to run the devnet node.
+this guide is for those who ran pipe devnet node and or anyone has gotten an invite code to run the Testnet node.
+
+![IMG_2730](https://github.com/user-attachments/assets/e6e5b781-9b73-446a-8d13-e9f3d7b395e1)
 
 ### Pre-Requisites 
 
@@ -152,4 +154,5 @@ docker logs -f popnode
 
 if you see this then you're good!
 
+![Image 5-12-25 at 12 45 PM](https://github.com/user-attachments/assets/864eb481-dbb9-46ea-9cf9-f065cd3b639e)
 
