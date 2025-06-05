@@ -73,7 +73,7 @@ RUN apt update && \
 WORKDIR /app
 
 # Download pop binary
-RUN wget -O pop.tar.gz https://download.pipe.network/static/pop-v0.3.0-linux-x64.tar.gz && \
+RUN wget -O pop.tar.gz https://download.pipe.network/static/pop-v0.3.2-linux-x64.tar.gz && \
     tar -xzf pop.tar.gz && \
     chmod +x pop && \
     mv pop /usr/local/bin/pop && \
