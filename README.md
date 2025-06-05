@@ -144,7 +144,7 @@ docker rm -f popnode
 docker run -d --name popnode \
   -v ~/pipe-docker/config/config.json:/app/config.json \
   -p 4000:4000 \
-  pipe-pop pop --config /app/config.json
+  pipe-pop pop /app/config.json
 ```
 
 B: Monitor the Logs
